@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+VM=${1:-win10}
+GROUP=wheel
+
+# Relevant paths
+INCUS=/var/run/incus
+VMDIR=${INCUS}/${VM}
+SPICE=${INCUS}/${VM}/qemu.spice
+
+# First check if we have access to the shared memory device.
+#
+# Use udev rules to set permissions.
+# IVSHMEM=/dev/shm/looking-glass
+IVSHMEM=/dev/kvmfr0
+if ! [[ -r ${IVSHMEM} && -w ${IVSHMEM} ]]; then
+  ls -l ${IVSHMEM}
+  echo "need rw access to shared memory device ${IVSHMEM}"
+  exit 1
+fi
+
+# Iff necessary, grant read-execute on the incus run directory to
+# the group in ${GROUP}.
+if ! [[ -x ${INCUS} && -r ${INCUS} ]]; then
+  sudo chown :${GROUP} ${INCUS} && sudo chmod g=rx ${INCUS}
+fi
+
+# Iff necessary, grant read-execute on the vm directory, and
+# read-write on the spice socket, to the group in ${GROUP}.
+if ! [[ -x ${VMDIR} && -r ${VMDIR} && -r ${SPICE} && -w ${SPICE} ]]; then
+  sudo chown :${GROUP} ${VMDIR} && sudo chmod g=rx ${VMDIR}
+  sudo chown :${GROUP} ${SPICE} && sudo chmod g=rw ${SPICE}
+fi
+
+looking-glass-client -f ${IVSHMEM} -c ${SPICE} -p 0 win:size=2880x1620
