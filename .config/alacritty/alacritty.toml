@@ -1,0 +1,37 @@
+[font]
+normal = { family = "MonoLisa" }
+size = 13.5
+
+[keyboard]
+bindings = [
+  { key = "N", mods = "Control|Shift", action = "CreateNewWindow" }
+]
+
+[mouse]
+hide_when_typing = true
+
+[colors.primary]
+background = "#1d2021"
+foreground = "#d4be98"
+
+[colors.normal]
+black = "#3c3836"
+white = "#ddc7a1"
+red = "#ea6962"
+yellow = "#d8a657"
+green = "#a9b665"
+cyan = "#89b482"
+blue = "#7daea3"
+magenta = "#d3869b"
+
+[colors.bright]
+# black = "#3c3836"
+black = "#6c6866"
+white = "#ddc7a1"
+red = "#ea6962"
+yellow = "#d8a657"
+green = "#a9b665"
+cyan = "#89b482"
+blue = "#7daea3"
+magenta = "#d3869b"
+
