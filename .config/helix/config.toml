@@ -1,0 +1,17 @@
+theme = "gruvbox-material-dark-hard"
+
+[editor]
+true-color = true
+bufferline = "multiple"
+end-of-line-diagnostics = "hint"
+
+[editor.statusline]
+center = ["version-control"]
+right = ["diagnostics", "selections", "register", "position", "position-percentage", "file-encoding"]
+
+[editor.inline-diagnostics]
+cursor-line = "hint"
+other-lines = "error"
+
+[editor.lsp]
+display-progress-messages = true
