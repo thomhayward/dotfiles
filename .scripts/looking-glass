@@ -32,4 +32,4 @@ if ! [[ -x ${VMDIR} && -r ${VMDIR} && -r ${SPICE} && -w ${SPICE} ]]; then
   sudo chown :${GROUP} ${SPICE} && sudo chmod g=rw ${SPICE}
 fi
 
-looking-glass-client -f ${IVSHMEM} -c ${SPICE} -p 0 win:size=2880x1620
+looking-glass-client -f ${IVSHMEM} -c ${SPICE} -p 0 win:size=2880x1620 win:title="Looking Glass @ $VM"
